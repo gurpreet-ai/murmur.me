@@ -23,11 +23,20 @@ var bodyParser = require('body-parser');
 
 var morgan = require('morgan');
 
+var mongoose = require('mongoose');
+
 /* see config.js for all the configurations of the project */
 
 var config = require('./config');
 
 var app = express();
+
+mongoose.connect(config.database, function(error) {
+	if (error)
+		console.log(error)
+	else
+		console.log("Connected to the database on mongolab.com")
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
