@@ -2,7 +2,7 @@
 var express = require('express');
 
 /* Express middleware (bodyParser, Morgan) 
- * Middleware is a function that receives the request and 
+ * Middleware are functions that receive the request and 
  * response objects of an HTTP request/response cycle.
  */
 
