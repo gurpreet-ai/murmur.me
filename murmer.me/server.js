@@ -1,5 +1,4 @@
 /* Express.js is a lightweight HTTP framework for node.js */
-
 var express = require('express');
 
 /* Express middleware (bodyParser, Morgan) 
@@ -8,9 +7,8 @@ var express = require('express');
  */
 
 /* body-parser is a node.js middleware for handling 
- * JSON, Raw, Text and URL encoded form data. 
+ * JSON, Raw, Text and URL encoded form data.
  */
-
 var bodyParser = require('body-parser');
 
 /* 
@@ -20,13 +18,14 @@ var bodyParser = require('body-parser');
  * your server, such as your request logs.
  * see console for its output when the applciation is running..
  */
-
 var morgan = require('morgan');
 
+/* Mongoose is an mongodb object modelling API for node.js.
+ * It brings schema’s and models to Node.js / Mongodb (NoSQL).
+ */
 var mongoose = require('mongoose');
 
 /* see config.js for all the configurations of the project */
-
 var config = require('./config');
 
 var app = express();
