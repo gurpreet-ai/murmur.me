@@ -1,6 +1,15 @@
+/* Express.js is a lightweight HTTP framework for node.js */
+
 var express = require('express');
 
-// Express middleware (bodyParser, Morgan)
+/* Express middleware (bodyParser, Morgan) 
+ * Middleware is a function that receives the request and 
+ * response objects of an HTTP request/response cycle.
+ */
+
+/* body-parser is a node.js middleware for handling 
+ * JSON, Raw, Text and URL encoded form data. 
+ */
 
 var bodyParser = require('body-parser');
 
@@ -9,12 +18,13 @@ var bodyParser = require('body-parser');
  * It simplifies the process of logging requests to your application. 
  * You might think of Morgan as a helper that collects logs from 
  * your server, such as your request logs.
+ * see console for its output when the applciation is running..
  */
 
-// see console for its output when the applciation is running..
 var morgan = require('morgan');
 
-// see config.js for all the configurations of the project
+/* see config.js for all the configurations of the project */
+
 var config = require('./config');
 
 var app = express();
