@@ -10,7 +10,7 @@ how to use
 
 **Local Demo**:
 
-1. Install Node.js 0.8.x and MongoDB 2.x.
+1. Install Node.js and MongoDB.
 2. Inside project folder type `npm install`
 3. Run `node server.js` command
 4. Open the browser at the following URL: `http://localhost:3000`
