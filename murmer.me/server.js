@@ -30,6 +30,7 @@ var config = require('./config');
 
 var app = express();
 
+/* connect to the database */
 mongoose.connect(config.database, function(error) {
 	if (error)
 		console.log(error)
@@ -37,12 +38,18 @@ mongoose.connect(config.database, function(error) {
 		console.log("Connected to the database on mongolab.com")
 });
 
+/* use the middlewares */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(express.static(__dirname + '/public'));
+
+/* create an API (post and get) */
+var API = require('./app/routes/api.js')(app, express);
+app.use('/api', API);
 
 app.get('*', function (req, res) {
-	res.sendFile(__dirname + '/public/views/index.html');
+	res.sendFile(__dirname + '/public/app/views/index.html');
 });
 
 app.listen(config.port, function(error) {
@@ -51,3 +58,7 @@ app.listen(config.port, function(error) {
 	else 
 		console.log("listening on port 3000");
 });
+
+
+
+
