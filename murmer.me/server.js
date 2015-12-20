@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
  * It simplifies the process of logging requests to your application. 
  * You might think of Morgan as a helper that collects logs from 
  * your server, such as your request logs.
- * see console for its output when the applciation is running..
+ * see terminal for its output when the applciation is running..
  */
 var morgan = require('morgan');
 
@@ -58,6 +58,11 @@ app.listen(config.port, function(error) {
 	else 
 		console.log("listening on port 3000");
 });
+
+
+
+
+
 
 
 

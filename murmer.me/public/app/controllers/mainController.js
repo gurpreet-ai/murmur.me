@@ -1,9 +1,10 @@
 angular.module('mainController', [])
 
-.controller('main', function ($rootScope, $location, Auth) {
+.controller('mainCtrl', function ($rootScope, $location, Auth) {
+	
 	var vm = this;
 
-	vm.loggedIn = Auth.isLogged();
+	vm.loggedIn = Auth.isLoggedIn();
 
 	$rootScope.$on('$routeChangeStart', function() {
 		vm.loggedIn = Auth.isLoggedIn();
@@ -13,6 +14,31 @@ angular.module('mainController', [])
 		});
 	});
 
-	vm.data
+	vm.doLogin = function() {
+		vm.processing = true;
+		vm.error = '';
 
-})
+		console.log(vm.loginData.username);
+		console.log(vm.loginData.password);
+
+		Auth.login(vm.loginData.username, vm.loginData.password)
+			.success(function (data) {
+				vm.processing = false;
+				Auth.getUser(data)
+					.then(function () {
+						vm.user = data.data;
+					});
+
+				if (data.success)
+					$location.path('/');
+				else
+					vm.error = data.message;
+			})
+	}
+
+	vm.doLogout = function () {
+		Auth.logout();
+		$location.path('/logout');
+	}
+
+});

@@ -1,1 +1,1 @@
-angular.module('murmerApp', []);
+angular.module('murmerApp', ['appRoutes', 'mainController', 'authService']);
