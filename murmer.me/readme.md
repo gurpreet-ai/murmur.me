@@ -1,12 +1,12 @@
 murmer.me
 =======
 
-murmer.me is a messaging service, similar to messenger.com, built on MEAN Stack.
+murmer.me is a messaging service, similar to messenger.com, built on MEAN Stack (MongoDB, ExpressJS, AngularJS, NodeJS).
 
 how to use
 ==========
 
-**Live Demo**:
+**Live Demo**: COMMING SOON
 
 **Local Demo**:
 
