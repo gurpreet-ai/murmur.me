@@ -2,7 +2,6 @@
 var User = require('../models/user');
 
 var jsonwebToken = require('jsonwebtoken');
-
 var config = require('../../config');
 var secretKey = config.secretKey;
 
@@ -67,13 +66,47 @@ module.exports = function (app, express) {
 				} else {
 					var token = createToken(user);
 					response.json({
-						sucess: true,
+						success: true,
 						message: "Successfully login!",
 						token: token
 					});
 				}
 			}
 		});
+	});
+
+	/* above this line, DESTINATION A */
+
+	/* custom middleware below */
+
+	api.use(function (request, response, next) {
+		console.log("somebody just came to our app!!!!");
+
+		var token = request.body.token || request.param('token') || request.headers['x-access-token'];
+
+		if (token) {
+			jsonwebToken.verify(token, secretKey, function (error, decoded) {
+				if (error) {
+					response.status(403).send({success: false, message: "Failed to authenticate user"});
+				} else {
+					request.decoded = decoded;
+					next();
+				}
+			});
+		} else {
+			response.status(403).send({success: false, message: "No Token Provided!!"});
+		}
+	});
+
+	/* below this line, DESTINATION B (have to provide a legitimate token) */
+
+	// api.get('/login', function(request, response) {
+	// 	response.json("hello world");
+	// })
+
+
+	api.get(function (request, response) {
+		response.json("hello world");
 	});
 
 	return api;

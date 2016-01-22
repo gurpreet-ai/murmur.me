@@ -28,7 +28,14 @@ var mongoose = require('mongoose');
 /* see config.js for all the configurations of the project */
 var config = require('./config');
 
+/* create an express app */
 var app = express();
+
+/* use the middlewares */
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(morgan('dev'));
+app.use(express.static(__dirname + '/public'));
 
 /* connect to the database */
 mongoose.connect(config.database, function(error) {
@@ -37,12 +44,6 @@ mongoose.connect(config.database, function(error) {
 	else
 		console.log("Connected to the database on mongolab.com")
 });
-
-/* use the middlewares */
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(morgan('dev'));
-app.use(express.static(__dirname + '/public'));
 
 /* create an API (post and get) */
 var API = require('./app/routes/api.js')(app, express);

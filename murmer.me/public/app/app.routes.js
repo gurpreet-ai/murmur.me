@@ -7,10 +7,12 @@ angular.module('appRoutes', ['ngRoute'])
 			.when('/login', {
 				templateUrl: 'app/views/pages/login.html'
 			})
-
+			.when('/sign-up', {
+				templateUrl: 'app/views/pages/sign-up.html'
+			})
+			
 		$locationProvider.html5Mode({
 		  enabled: true,
 		  requireBase: false
 		});
-		
 	});

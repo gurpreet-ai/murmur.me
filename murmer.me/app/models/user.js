@@ -1,7 +1,6 @@
 /* user.js schema, how our data looks in the database, the object model 
  * performing data validation and more...
  */
-
 var mongoose = require('mongoose');
 
 /* bcrypt is the proper way to store passwords in your database  */
