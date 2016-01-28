@@ -23,7 +23,7 @@ module.exports = function (app, express) {
 	var api = express.Router();
 
 	/* create a new user and save it in the database */
-	api.post('/signup', function (request, response) {
+	api.post('/sign-up', function (request, response) {
 		var user = new User({
 			name: request.body.name,
 			username: request.body.username,
@@ -52,11 +52,13 @@ module.exports = function (app, express) {
 
 	/* login to the system, will return a token if successful */
 	api.post('/login', function (request, response) {
+		
+		
 		User.findOne({
 			username: request.body.username
 		}).select('password').exec(function (error, user) {
 			if (error) throw error;
-
+			
 			if (!user) {
 				response.send({ message: "User doesn't exist"});
 			} else if (user) {
@@ -80,12 +82,17 @@ module.exports = function (app, express) {
 	/* custom middleware below */
 
 	api.use(function (request, response, next) {
+		console.log(request);
 		console.log("somebody just came to our app!!!!");
 
 		var token = request.body.token || request.param('token') || request.headers['x-access-token'];
+		console.log(token);
 
 		if (token) {
 			jsonwebToken.verify(token, secretKey, function (error, decoded) {
+
+				console.log("I came here");
+
 				if (error) {
 					response.status(403).send({success: false, message: "Failed to authenticate user"});
 				} else {
@@ -105,9 +112,13 @@ module.exports = function (app, express) {
 	// })
 
 
-	api.get(function (request, response) {
-		response.json("hello world");
-	});
+	// api.get(function (request, response) {
+	// 	response.json("hello world");
+	// });
+
+	api.get('/me', function(req, res){
+        res.json(req.decoded);
+    });
 
 	return api;
 }

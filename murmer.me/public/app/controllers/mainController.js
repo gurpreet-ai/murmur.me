@@ -8,9 +8,14 @@ angular.module('mainController', [])
 
 	$rootScope.$on('$routeChangeStart', function() {
 		vm.loggedIn = Auth.isLoggedIn();
+		
 		Auth.getUser().then(function (data) {
 			vm.user = data.data;
 		});
+
+		vm.isActive =  function (viewLocation) { 
+	        return viewLocation === $location.path();
+	    };
 	});
 
 	vm.doLogin = function() {
