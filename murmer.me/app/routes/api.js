@@ -53,18 +53,23 @@ module.exports = function (app, express) {
 	/* login to the system, will return a token if successful */
 	api.post('/login', function (request, response) {
 		
-		
 		User.findOne({
 			username: request.body.username
 		}).select('password').exec(function (error, user) {
 			if (error) throw error;
 			
 			if (!user) {
-				response.send({ message: "User doesn't exist"});
+				response.send({ 
+					message: "User doesn't exist",
+					success: false
+				});
 			} else if (user) {
 				var validPassword = user.comparePassword(request.body.password);
 				if (!validPassword) {
-					response.send({ message: "Invalid Password"});
+					response.send({
+						message: "Invalid Password",
+						success: false
+					});
 				} else {
 					var token = createToken(user);
 					response.json({
@@ -82,17 +87,9 @@ module.exports = function (app, express) {
 	/* custom middleware below */
 
 	api.use(function (request, response, next) {
-		console.log(request);
-		console.log("somebody just came to our app!!!!");
-
 		var token = request.body.token || request.param('token') || request.headers['x-access-token'];
-		console.log(token);
-
 		if (token) {
 			jsonwebToken.verify(token, secretKey, function (error, decoded) {
-
-				console.log("I came here");
-
 				if (error) {
 					response.status(403).send({success: false, message: "Failed to authenticate user"});
 				} else {

@@ -19,7 +19,7 @@
 						<li ng-class="{ active: main.isActive('/')}" ><a href="/">Home</a></li>
 						<li ng-class="{ active: main.isActive('/login')}" ng-if="!main.loggedIn"><a href="/login">Login</a></li>
                         <li ng-class="{ active: main.isActive('/sign-up')}" ng-if="!main.loggedIn"><a href="/sign-up">Signup</a></li>
-                        <li ng-if="main.loggedIn"><a href="/user">Hello {{ main.user.username}}</a></li>
+                        <li ng-if="main.loggedIn"><a href="">Hello {{ main.user.username}}</a></li>
                         <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
 					</ul>
 				</div>

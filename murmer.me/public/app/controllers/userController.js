@@ -15,9 +15,7 @@ angular.module('userController', ['userService'])
         vm.message = '';
         user.create(vm.userData)
             .then(function(response) {
-                
                 console.log(response);
-
                 vm.userData = {};
                 vm.message = response.data.message;
                 $window.localStorage.setItem('token', response.data.token);
